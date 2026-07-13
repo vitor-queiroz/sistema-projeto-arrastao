@@ -1,0 +1,12 @@
+.login {
+    display: flex;
+    height: 100vh;
+}
+
+.login__banner {
+    flex: 1;
+}
+
+.login__formulario {
+    flex: 1;
+}
