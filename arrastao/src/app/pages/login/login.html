@@ -1,44 +1,63 @@
 <main class="login">
 
-    <section class="login__banner">
+    <section class="login-banner">
 
-        <div class="login__banner-content">
-            <h1>Bem-vindo!</h1>
-            <p>Gerencie documentos de forma rápida e segura.</p>
+
+
+        <div class="banner-imagens">
+
+            <img src="imagens/img1.jpg" alt="Criança participante do Projeto Arrastão">
+            <img src="imagens/img2.jpg" alt="Criança participante do Projeto Arrastão">
+            <img src="imagens/img3.jpg" alt="Criança participante do Projeto Arrastão">
+            <img src="imagens/img4.jpg" alt="Criança participante do Projeto Arrastão">
+            <img src="imagens/img5.jpg" alt="Criança participante do Projeto Arrastão">
+
+        </div>
+
+
+        <div class="login-sobreposicao"></div>
+        <div class="marca-arrastao">
+
+            <span class="projeto">PROJETO</span>
+
+            <span class="arrastao">ARRASTÃO</span>
         </div>
 
     </section>
 
-    <section class="login__formulario">
+    <section class="login-formulario">
 
         <div class="login-card">
 
-            <img 
-            class="logo"
-            src="assets/logo/logoarrastao.png" 
-            alt="Logo do Projeto Arrastão">
+            <img class="logo" src="imagens/arrastao12.png" alt="Logo do Projeto Arrastão">
 
             <form class="login-form">
+                <div class="campo">
 
-             <div class="campo">   
-               <label for="usuario">Usuário</label>     
+                    <label for="perfil">Tipo de acesso</label>
 
-                <input 
-                id="usuario"
-                type="text" 
-                placeholder="Digite seu usuário"
-                autocomplete="username">
-             </div>
+                    <select id="perfil">
 
-             <div class="campo">
-                <label for="senha">Senha</label>
+                        <option value="admin"></option>
+                        <option value="admin">Administrador</option>
 
-                <input
-                id="senha" 
-                type="password"
-                placeholder="Digite sua senha"
-                autocomplete="current-password">
-             </div>   
+                        <option value="superadmin">Super Administrador</option>
+
+                    </select>
+
+                </div>
+
+                <div class="campo">
+                    <label for="usuario">Usuário</label>
+
+                    <input id="usuario" type="text" placeholder="Digite seu usuário" autocomplete="username">
+                </div>
+
+                <div class="campo">
+                    <label for="senha">Senha</label>
+
+                    <input id="senha" type="password" placeholder="Digite sua senha" autocomplete="current-password">
+                </div>
 
                 <button class="botao-entrar" type="submit">
                     Entrar

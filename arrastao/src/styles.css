@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "Matisse";
+    src: url("/fonts/matisse_0.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Myriad Pro";
+    src: url("/fonts/MYRIADPRO-SEMIBOLD.OTF") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+}

@@ -1,12 +1,222 @@
 .login {
-    display: flex;
+    position: relative;
+    width: 100%;
     height: 100vh;
+    overflow: hidden;
 }
 
-.login__banner {
-    flex: 1;
+.login-banner {
+    position: absolute;
+    inset: 0;
+
 }
 
-.login__formulario {
-    flex: 1;
+.banner-imagens {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns:repeat(5,1fr);
 }
+
+.banner-imagens img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.login-sobreposicao {
+    position: absolute;
+    inset: 0;
+    background:linear-gradient( rgba(2, 8, 20, 0.8), rgba(0, 0, 0, 0.993));
+
+    z-index: 2;
+}
+
+.conteudo-banner {
+    position: absolute;
+    left: 8%;
+    top:50%;
+    transform:translateY(-50%);
+
+    z-index: 4;
+    max-width: 420px;
+}
+
+.conteudo-banner h1 {
+
+    font-size: 52px;
+    font-weight: 700;
+    color: white;
+
+    margin-bottom: 18px;
+}
+
+.conteudo-banner p {
+
+    font-size: 20px;
+    line-height: 1.6;
+
+    color: rgba(255,255,255,.85);
+}
+
+
+
+.login-formulario {
+    position:absolute;
+    top:50%;
+    right:14%;
+    transform:translateY(-50%);
+    z-index:5;
+}
+
+.login-card {
+    width: 480px;
+    padding: 55px;
+    box-sizing: border-box;
+    border-radius: 15px;
+
+    background: linear-gradient(107deg, #949494, rgba(0, 0, 0, 0));
+}
+
+.logo {
+    width: 105px;
+    display: block;
+    margin: 0 auto 28px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    width: 100%;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.campo select{
+    width:100%;
+    height:32px;
+    padding:0 15px;
+    border:1px solid #D8D8D8;
+    border-radius:12px;
+    font-size:15px;
+    color:#2F2F2F;
+    transition:.25s;
+    cursor:pointer;
+}
+
+.campo select:focus{
+    outline:none;
+    border-color:#0F3D91;
+    box-shadow:0 0 0 3px rgba(15,61,145,.12);
+}
+
+.campo label {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #ffffff;
+}
+
+.campo input {
+    width: 100%;
+    height: 42px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border: 1px solid #D8D8D8;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.campo input::placeholder {
+    color: #9A9A9A;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: #0F3D91;
+    box-shadow: 0 0 0 3px rgba(15,61,145,.12);
+}
+
+.botao-entrar {
+    width: 100%;
+    height: 52px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 12px;
+
+    background: #0F3D91;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: .25s;
+}
+
+.botao-entrar:hover {
+    background: rgb(2, 24, 65);
+    transform: translateY(-2px);
+}
+
+.botao-entrar:active {
+    transform: translateY(0);
+}
+
+
+/* --------------IDEIA DO PEOJRTO NO FUNDO---------*/
+.marca-arrastao{
+
+    position:absolute;
+
+    top:50%;
+    left:27%;
+
+    transform:translate(-50%,-50%);
+
+    z-index:3;
+
+    text-align:center;
+
+    user-select:none;
+
+    pointer-events:none;
+}
+
+.projeto{
+    display:block;
+    font-family: "Myriad Pro", sans-serif;
+
+    background: linear-gradient(8885deg, #525151, #d7d7d7);
+    font-size:56px;
+    letter-spacing:30px;
+
+    font-weight:300;
+    margin-bottom:10px;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.arrastao{
+    display:block;
+    font-family: "Matisse", serif;
+
+    background: linear-gradient(95deg, #d7d7d7, #525151);
+    letter-spacing: 35px;
+    font-size:130px;
+    font-weight: normal;
+
+    line-height:1;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+} /* -------------------AQUI ACABAA------------------*/
+
