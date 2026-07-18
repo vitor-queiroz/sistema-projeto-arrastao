@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { app } from '../../config/firebase.config';
+
 @Component({
   selector: 'app-painel',
   standalone: true,
