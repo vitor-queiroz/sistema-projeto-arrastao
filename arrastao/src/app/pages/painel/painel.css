@@ -7,6 +7,43 @@
     font-size:32px;
 }
 
+.search-box{
+    margin-bottom:35px;
+}
+
+.search-box input{
+    width:29.7%;
+    padding:16px 20px;
+    font-size:16px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    outline:none;
+    transition:.2s;
+}
+
+.search-box input:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.15);
+}
+
+.resultado-pesquisa{
+    margin-bottom:30px;
+}
+
+.resultado{
+    padding:15px;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    margin-bottom:10px;
+    cursor:pointer;
+}
+
+.resultado:hover{
+    background:#f8fafc;
+}
+
 .cards{
     display:flex;
     gap:25px;
