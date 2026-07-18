@@ -1,0 +1,56 @@
+.dashboard{
+    padding:40px;
+}
+
+.dashboard h1{
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+.cards{
+    display:flex;
+    gap:25px;
+    margin-bottom:40px;
+
+}
+
+.card{
+    flex:1;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:25px;
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+}
+
+.card h2{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#6b7280;
+}
+
+.recentes{
+    background:#fff;
+    border-radius:12px;
+    border:1px solid #e5e7eb;
+    padding:25px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #ececec;
+}
