@@ -31,32 +31,32 @@
 
             <img class="logo" src="imagens/arrastao12.png" alt="Logo do Projeto Arrastão">
 
-            <form class="login-form">
+            <form class="login-form" (ngSubmit)="entrar()">
                 <div class="campo">
 
-                    <label for="perfil">Tipo de acesso</label>
-
-                    <select id="perfil">
-
-                        <option value="admin"></option>
-                        <option value="admin">Administrador</option>
-
-                        <option value="superadmin">Super Administrador</option>
-
-                    </select>
 
                 </div>
 
                 <div class="campo">
-                    <label for="usuario">Usuário</label>
+                    <label for="usuario">E-mail</label>
 
-                    <input id="usuario" type="text" placeholder="Digite seu usuário" autocomplete="username">
+                    <input id="email" 
+                    type="email" 
+                    placeholder="Digite seu e-mail" 
+                    autocomplete="email"
+                    [(ngModel)]="email"
+                    name="email">
                 </div>
 
                 <div class="campo">
                     <label for="senha">Senha</label>
 
-                    <input id="senha" type="password" placeholder="Digite sua senha" autocomplete="current-password">
+                    <input id="senha" 
+                    type="password" 
+                    placeholder="Digite sua senha" 
+                    autocomplete="current-password"
+                    [(ngModel)]="senha"
+                    name="senha"> <!--O atributo ""name""" é obrigatório quando usamos [(ngModel)] dentro de um formulário.-->
                 </div>
 
                 <button class="botao-entrar" type="submit">
