@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { app } from '../../config/firebase.config';
+import { FuncionarioService } from '../../services/funcionario.services';
 
 @Component({
   selector: 'app-painel',
@@ -12,41 +11,43 @@ import { app } from '../../config/firebase.config';
   templateUrl: './painel.html',
   styleUrl: './painel.css',
 })
-export class Painel {
+export class Painel implements OnInit {
 
+  funcionarios: any[] = [];
+  totalFuncionarios = 0;
   pesquisa = '';
 
-  funcionarios = [
-    {
-      nome: 'Maria Silva',
-      cpf: '12345678900',
-      setor: 'Administrativo'
-    },
-    {
-      nome: 'Carlos Souza',
-      cpf: '98765432100',
-      setor: 'Financeiro'
-    },
-    {
-      nome: 'Ana Paula',
-      cpf: '45612378900',
-      setor: 'RH'
-    },
-    {
-      nome: 'Pedro Henrique',
-      cpf: '74185296300',
-      setor: 'Financeiro'
-    }
-  ];
+  constructor(private funcionarioService: FuncionarioService) { }
+
+  ngOnInit() {
+    this.carregarFuncionarios();
+  }
+
+  async carregarFuncionarios() {
+
+  this.funcionarios = await this.funcionarioService.listarFuncionarios();
+  this.totalFuncionarios = this.funcionarios.length;
+
+}
 
   funcionariosFiltrados() {
 
-    return this.funcionarios.filter(funcionario =>
-      funcionario.nome.toLowerCase().includes(this.pesquisa.toLowerCase()) ||
+    return this.funcionarios.filter(funcionario => {
+      const termo = this.pesquisa.toLowerCase();
+    
+      return(
+      funcionario.nome?.toLowerCase().includes(termo) ||
       funcionario.cpf.includes(this.pesquisa) ||
-      funcionario.setor.toLowerCase().includes(this.pesquisa.toLowerCase())
-
+      funcionario.setor?.toLowerCase().includes(termo)
     );
-
-  }
+  });
 }
+}
+/*
+ngOnInit() executa
+⬇
+carregarFuncionarios() chama o serviço
+⬇
+FuncionarioService busca a coleção funcionarios no Firestore
+⬇
+Logo depois, os dados entram em (this.funcionarios = ...*/

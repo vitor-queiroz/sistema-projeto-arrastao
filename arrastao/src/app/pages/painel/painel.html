@@ -8,15 +8,34 @@
 
         <div class="resultado-pesquisa">
 
-            <div class="resultado" *ngFor="let funcionario of funcionariosFiltrados()">
+            <table>
 
-                <strong>{{ funcionario.nome }}</strong>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Setor</th>
+                        <th>Admissão</th>
+                    </tr>
+                </thead>
 
-                <p>{{ funcionario.setor }}</p>
+                <tbody>
 
-            </div>
-        </div>
+                    <tr *ngFor="let funcionario of funcionariosFiltrados()">
+
+                        <td>{{ funcionario.nome }}</td>
+                        <td>{{ funcionario.cpf }}</td>
+                        <td>{{ funcionario.setor }}</td>
+                        <td>{{ funcionario.admissao }}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
     </div>
+    </div>
+    
 
     <div class="cards">
 
@@ -26,7 +45,7 @@
         </div>
 
         <div class="card">
-            <h2>350</h2>
+            <h2>{{ totalFuncionarios }}</h2>
             <p>Funcionários</p>
         </div>
 
