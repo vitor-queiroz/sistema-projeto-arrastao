@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app } from '../config/firebase.config';
 
+import { onAuthStateChanged, User } from 'firebase/auth';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -21,5 +23,20 @@ export class AuthService {
         return await signOut(this.auth);
 
     }
+
+
+    getUsuarioLogado(): Promise<User | null> {
+
+    return new Promise((resolve) => {
+
+        const unsubscribe = onAuthStateChanged(this.auth, (user) => {
+
+            unsubscribe();
+
+            resolve(user);
+        });
+    });
+
+}
 
 }

@@ -6,6 +6,8 @@ import { Documentos } from './pages/documentos/documentos';
 import { Usuarios } from './pages/usuarios/usuarios';
 import { Configuracoes } from './pages/configuracoes/configuracoes';
 
+import { authGuard } from './guards/auth.guard';
+
 
 export const routes: Routes = [
     {
@@ -18,6 +20,7 @@ export const routes: Routes = [
     {
         path: '',
         component: Layout,
+        canActivate: [authGuard],
         children: [
             {
                 path: 'painel',
