@@ -1,6 +1,8 @@
 <section class="dashboard">
 
-    <h1>👋 Bem-vindo novamente, Gilmar</h1>
+    <h1>👋 Bem-vindo novamente, 
+        {{ authService.perfilUsuario?.nome }}
+    </h1>
 
     <div class="search-box">
         <input type="text" placeholder="Pesquisar funcionário, CPF, setor..." [(ngModel)]="pesquisa" />

@@ -21,6 +21,8 @@ export class Login {
     try {
 
       await this.authService.login(this.email, this.senha);
+      await this.authService.buscarPerfil();
+      console.log(this.authService.perfilUsuario);
 
       this.router.navigate(['/painel']);
 

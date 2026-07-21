@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { FuncionarioService } from '../../services/funcionario.services';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-painel',
@@ -17,7 +18,7 @@ export class Painel implements OnInit {
   totalFuncionarios = 0;
   pesquisa = '';
 
-  constructor(private funcionarioService: FuncionarioService) { }
+  constructor(private funcionarioService: FuncionarioService, public authService: AuthService) { }
 
   ngOnInit() {
     this.carregarFuncionarios();
@@ -42,6 +43,7 @@ export class Painel implements OnInit {
     );
   });
 }
+
 }
 /*
 ngOnInit() executa
