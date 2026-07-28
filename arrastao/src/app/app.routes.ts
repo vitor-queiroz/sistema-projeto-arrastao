@@ -7,7 +7,7 @@ import { Usuarios } from './pages/usuarios/usuarios';
 import { Configuracoes } from './pages/configuracoes/configuracoes';
 
 import { authGuard } from './guards/auth.guard';
-
+import { superAdminGuard } from './guards/super-admin.guard';
 
 export const routes: Routes = [
     {
@@ -33,10 +33,12 @@ export const routes: Routes = [
             {
                 path: 'usuarios',
                 component: Usuarios,
+                canActivate: [superAdminGuard]
             },
             {
                 path: 'configuracoes',
                 component: Configuracoes,
+                canActivate: [superAdminGuard]
             },
         ],
     },

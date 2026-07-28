@@ -18,6 +18,8 @@ export class AuthService {
 
     async login(email: string, senha: string) {
 
+        this.perfilUsuario = null;
+
         return await signInWithEmailAndPassword(this.auth, email, senha);
 
     }

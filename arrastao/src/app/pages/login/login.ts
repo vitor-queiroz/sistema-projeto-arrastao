@@ -22,8 +22,7 @@ export class Login {
 
       await this.authService.login(this.email, this.senha);
       await this.authService.buscarPerfil();
-      console.log(this.authService.perfilUsuario);
-
+    
       this.router.navigate(['/painel']);
 
     } catch (error) {
@@ -31,10 +30,7 @@ export class Login {
       alert('E-mail ou senha inválidos.');
 
       console.error(error);
-
     }
-
   }
-
 }
 
