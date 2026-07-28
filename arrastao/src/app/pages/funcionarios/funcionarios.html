@@ -1,0 +1,32 @@
+<div class="topo-funcionarios">
+
+    <div>
+        <h1>Gestão de Funcionários</h1>
+        <p>Gerencie os colaboradores da instituição.</p>
+    </div>
+
+    <button
+        class="btn-novo"
+        (click)="abrirModal()">
+        + Novo Funcionário
+    </button>
+
+</div>
+
+<div
+    class="modal-backdrop"
+    *ngIf="modalAberto">
+
+    <div class="modal">
+
+        <button
+            class="fechar"
+            (click)="fecharModal()">
+            ✕
+        </button>
+
+        <app-funcionario-form></app-funcionario-form>
+
+    </div>
+
+</div>

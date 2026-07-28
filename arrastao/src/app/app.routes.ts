@@ -8,6 +8,7 @@ import { Configuracoes } from './pages/configuracoes/configuracoes';
 
 import { authGuard } from './guards/auth.guard';
 import { superAdminGuard } from './guards/super-admin.guard';
+import { Funcionarios } from './pages/funcionarios/funcionarios';
 
 export const routes: Routes = [
     {
@@ -40,6 +41,10 @@ export const routes: Routes = [
                 component: Configuracoes,
                 canActivate: [superAdminGuard]
             },
+            {
+                path: 'funcionarios',
+                component: Funcionarios,
+            }
         ],
     },
 
