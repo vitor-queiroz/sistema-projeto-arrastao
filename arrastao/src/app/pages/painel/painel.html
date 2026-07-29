@@ -1,43 +1,9 @@
 <section class="dashboard">
 
-    <h1>👋 Bem-vindo novamente, 
+    <h1>👋 Bem-vindo novamente,
         {{ authService.perfilUsuario?.nome }}
     </h1>
 
-    <div class="search-box">
-        <input type="text" placeholder="Pesquisar funcionário, CPF, setor..." [(ngModel)]="pesquisa" />
-
-
-        <div class="resultado-pesquisa">
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Setor</th>
-                        <th>Admissão</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr *ngFor="let funcionario of funcionariosFiltrados()">
-
-                        <td>{{ funcionario.nome }}</td>
-                        <td>{{ funcionario.cpf }}</td>
-                        <td>{{ funcionario.setor }}</td>
-                        <td>{{ funcionario.admissao }}</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-    </div>
-    </div>
-    
 
     <div class="cards">
 

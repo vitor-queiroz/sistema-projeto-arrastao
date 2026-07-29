@@ -6,6 +6,8 @@ import { FuncionarioService } from '../../services/funcionario.services';
 import { AuthService } from '../../services/auth.service';
 import { FuncionarioForm } from '../../components/funcionario-form/funcionario-form';
 
+import { Funcionario } from '../../models/funcionario.model';
+
 @Component({
   selector: 'app-funcionarios',
   standalone: true,
@@ -20,11 +22,17 @@ export class Funcionarios implements OnInit {
   pesquisa = '';
 
   modalAberto = false;
+  funcionarioSelecionado: Funcionario | null = null;
 
   constructor(private funcionarioService: FuncionarioService, public authService: AuthService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    if(!this.authService.perfilUsuario){
+      await this.authService.buscarPerfil();
+    }
+
     this.carregarFuncionarios();
+  
   }
 
   async carregarFuncionarios() {
@@ -33,6 +41,14 @@ export class Funcionarios implements OnInit {
     this.totalFuncionarios = this.funcionarios.length;
 
   }
+
+  editarFuncionario(funcionario: Funcionario) {
+
+  this.funcionarioSelecionado = funcionario;
+
+  this.modalAberto = true;
+
+}
 
   funcionariosFiltrados() {
 
@@ -51,11 +67,13 @@ export class Funcionarios implements OnInit {
   }
 
   abrirModal() {
+    this.funcionarioSelecionado = null;
     this.modalAberto = true;
   }
 
   fecharModal() {
     this.modalAberto = false;
+    this.funcionarioSelecionado = null;
   }
 
 }

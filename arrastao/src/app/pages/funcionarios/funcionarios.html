@@ -6,6 +6,7 @@
     </div>
 
     <button
+        *ngIf="authService.isSuperAdmin()"
         class="btn-novo"
         (click)="abrirModal()">
         + Novo Funcionário
@@ -25,8 +26,51 @@
             ✕
         </button>
 
-        <app-funcionario-form></app-funcionario-form>
+        <app-funcionario-form [funcionario]="funcionarioSelecionado"></app-funcionario-form> <!--Isso faz o Angular enviar o funcionário selecionado para o formulário-->
 
     </div>
 
 </div>
+
+    <div class="search-box">
+        <input type="text" placeholder="Pesquisar funcionário, CPF, setor..." [(ngModel)]="pesquisa" />
+
+
+        <div class="resultado-pesquisa">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Setor</th>
+                        <th>Admissão</th>
+                        <th *ngIf="authService.isSuperAdmin()">Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let funcionario of funcionariosFiltrados()">
+
+                        <td>{{ funcionario.nome }}</td>
+                        <td>{{ funcionario.cpf }}</td>
+                        <td>{{ funcionario.setor }}</td>
+                        <td>{{ funcionario.admissao }}</td>
+
+                        <td *ngIf="authService.isSuperAdmin()">
+
+                            <button (click)="editarFuncionario(funcionario)">
+                                ✏️
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
