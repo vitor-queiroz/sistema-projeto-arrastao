@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore';
 import { app } from '../config/firebase.config';
+
+import { Funcionario } from '../models/funcionario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +10,7 @@ import { app } from '../config/firebase.config';
 export class FuncionarioService {
 
   private db = getFirestore(app);
+
 
   async listarFuncionarios() {
 
@@ -22,4 +25,12 @@ export class FuncionarioService {
 
   }
 
+
+  async cadastrarFuncionario(funcionario: Funcionario) {
+
+    const funcionariosRef = collection(this.db, 'funcionarios');
+
+    await addDoc(funcionariosRef, funcionario);
+
+  }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FuncionarioService } from '../../services/funcionario.services';
 
 @Component({
   selector: 'app-funcionario-form',
@@ -10,9 +11,30 @@ import { FormsModule } from '@angular/forms';
 })
 export class FuncionarioForm {
 
+  constructor(private funcionarioService: FuncionarioService) { }
+
   nome = '';
   cpf = '';
   setor = '';
   admissao = '';
 
+  async salvar() {
+
+    await this.funcionarioService.cadastrarFuncionario({
+
+      nome: this.nome,
+      cpf: this.cpf,
+      setor: this.setor,
+      admissao: this.admissao
+
+    });
+
+    this.nome = '';
+    this.cpf = '';
+    this.setor = '';
+    this.admissao = '';
+
+    alert('Funcionário cadastrado com sucesso!');
+
+  }
 }
