@@ -27,12 +27,12 @@ export class Funcionarios implements OnInit {
   constructor(private funcionarioService: FuncionarioService, public authService: AuthService) { }
 
   async ngOnInit() {
-    if(!this.authService.perfilUsuario){
+    if (!this.authService.perfilUsuario) {
       await this.authService.buscarPerfil();
     }
 
     this.carregarFuncionarios();
-  
+
   }
 
   async carregarFuncionarios() {
@@ -44,11 +44,28 @@ export class Funcionarios implements OnInit {
 
   editarFuncionario(funcionario: Funcionario) {
 
-  this.funcionarioSelecionado = funcionario;
+    this.funcionarioSelecionado = funcionario;
 
-  this.modalAberto = true;
+    this.modalAberto = true;
 
-}
+  }
+
+  async excluirFuncionario(funcionario: Funcionario) {
+
+    const confirmar = confirm(
+      `Deseja realmente excluir o funcionário ${funcionario.nome}?`);
+
+    if (!confirmar) {
+      return;
+    }
+
+    await this.funcionarioService.excluirFuncionario(funcionario.id!);
+
+    await this.carregarFuncionarios();
+
+    alert('Funcionário excluído com sucesso!');
+
+  }
 
   funcionariosFiltrados() {
 

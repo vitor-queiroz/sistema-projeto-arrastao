@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, doc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
 import { app } from '../config/firebase.config';
 
 import { Funcionario } from '../models/funcionario.model';
@@ -44,6 +44,14 @@ export class FuncionarioService {
       setor: funcionario.setor,
       admissao: funcionario.admissao
     });
+
+  }
+
+  async excluirFuncionario(id: string) {
+
+    const funcionarioRef = doc(this.db, 'funcionarios', id);
+
+    await deleteDoc(funcionarioRef);
 
   }
 }
