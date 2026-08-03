@@ -32,6 +32,7 @@ export class DocumentoForm implements OnChanges, OnInit {
   funcionarioId = '';
   tipo = '';
   nomeArquivo = '';
+  url = '';
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -40,6 +41,7 @@ export class DocumentoForm implements OnChanges, OnInit {
       this.funcionarioId = this.documento.funcionarioId;
       this.tipo = this.documento.tipo;
       this.nomeArquivo = this.documento.nomeArquivo;
+      this.url = this.documento.url;
     }
   }
 
@@ -71,7 +73,7 @@ export class DocumentoForm implements OnChanges, OnInit {
       funcionarioNome: funcionario.nome,
       tipo: this.tipo,
       nomeArquivo: this.nomeArquivo,
-      url: 'teste',
+      url: this.url,
       dataUpload: new Date().toLocaleDateString('pt-BR'),
       enviadoPor: 'Administrador'
 
@@ -97,6 +99,7 @@ export class DocumentoForm implements OnChanges, OnInit {
     this.funcionarioId = '';
     this.tipo = '';
     this.nomeArquivo = '';
+    this.url = '';
 
     this.salvou.emit();
 

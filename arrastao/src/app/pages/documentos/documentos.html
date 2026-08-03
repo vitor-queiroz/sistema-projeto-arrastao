@@ -8,7 +8,7 @@
         </button>
     </div>
 
-    <table>
+    <table *ngIf="documentos.length > 0">
 
         <thead>
 
@@ -35,13 +35,16 @@
                 <td>{{ documento.enviadoPor }}</td>
                 <td>{{ documento.dataUpload }}</td>
 
-                <td>
+                <td class="acoes">
+                    <button class="visualizar" *ngIf="documento.url" (click)="abrirDocumento(documento.url)">
+                        👁️ Visualizar
+                    </button>
 
-                    <button (click)="editarDocumento(documento)">
+                    <button class="editar" (click)="editarDocumento(documento)">
                         ✏️
                     </button>
 
-                    <button (click)="excluirDocumento(documento)">
+                    <button class="excluir" (click)="excluirDocumento(documento)">
                         🗑️
                     </button>
 
@@ -52,6 +55,10 @@
         </tbody>
 
     </table>
+
+    <div class="sem-documentos" *ngIf="documentos.length === 0">
+        📂 Nenhum documento cadastrado.
+    </div>
 
     <div class="modal" *ngIf="modalAberto">
 

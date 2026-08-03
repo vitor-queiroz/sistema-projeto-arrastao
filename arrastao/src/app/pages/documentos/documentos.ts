@@ -34,6 +34,13 @@ export class Documentos implements OnInit {
 
   }
 
+  
+  abrirDocumento(url: string) {
+
+    window.open(url, '_blank');
+
+  }
+
 
   editarDocumento(documento: Documento) {
 
