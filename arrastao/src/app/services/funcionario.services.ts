@@ -12,7 +12,7 @@ export class FuncionarioService {
   private db = getFirestore(app);
 
 
-  async listarFuncionarios() {
+  async listarFuncionarios(): Promise<Funcionario[]> {
 
     const funcionariosRef = collection(this.db, 'funcionarios');
 
@@ -21,7 +21,7 @@ export class FuncionarioService {
     return snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
-    }));
+    } as Funcionario));
 
   }
 

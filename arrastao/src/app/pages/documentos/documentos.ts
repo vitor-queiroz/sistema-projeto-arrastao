@@ -2,36 +2,28 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DocumentoService } from '../../services/documento.service';
 import { FormsModule } from '@angular/forms';
-import { FuncionarioService } from '../../services/funcionario.services';
+import { Documento } from '../../models/documento.model';
+import { DocumentoForm } from '../../components/documento-form/documento-form';
 
 @Component({
   selector: 'app-documentos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DocumentoForm],
   templateUrl: './documentos.html',
   styleUrl: './documentos.css',
 })
 export class Documentos implements OnInit {
 
-  documentos: any[] = [];
-  funcionarios: any[] = [];
+  documentos: Documento[] = [];
+
+  documentoSelecionado: Documento | null = null;
 
   modalAberto = false;
 
-  novoDocumento = {
-    funcionarioNome: '',
-    funcionarioId: '',
-    tipo: '',
-    nomeArquivo: '',
-    enviadoPor: 'Administrador',
-    dataUpload: new Date().toLocaleDateString('pt-BR'),
-    url: 'teste'
-  };
 
-  constructor(private documentoService: DocumentoService, private funcionarioService: FuncionarioService) { }
+  constructor(private documentoService: DocumentoService) { }
 
   async ngOnInit() {
-    await this.carregarFuncionarios();
     await this.carregarDocumentos();
   }
 
@@ -42,54 +34,36 @@ export class Documentos implements OnInit {
 
   }
 
-  async salvarDocumento() {
 
-    if (
-      !this.novoDocumento.funcionarioId ||
-      !this.novoDocumento.tipo ||
-      !this.novoDocumento.nomeArquivo
-    ) {
+  editarDocumento(documento: Documento) {
 
-      alert('Preencha todos os campos.');
-
-      return;
-
-    }
-
-    const funcionario = this.funcionarios.find(
-      f => f.id === this.novoDocumento.funcionarioId
-    );
-
-    if (!funcionario) {
-      alert('Funcionário não encontrado.');
-      return;
-    }
-
-    this.novoDocumento.funcionarioNome = funcionario.nome;
-
-    
-    await this.documentoService.cadastrarDocumento(this.novoDocumento);
-
-    alert('Documento cadastrado com sucesso!');
-
-    await this.carregarDocumentos();
-
-    this.novoDocumento = {
-      funcionarioNome: '',
-      funcionarioId: '',
-      tipo: '',
-      nomeArquivo: '',
-      enviadoPor: 'Administrador',
-      dataUpload: new Date().toLocaleDateString('pt-BR'),
-      url: 'teste'
-    };
-
-    this.fecharModal();
+    this.documentoSelecionado = documento;
+    this.modalAberto = true;
 
   }
 
+
+  async excluirDocumento(documento: Documento) {
+
+    const confirmar = confirm(
+      `Deseja realmente excluir "${documento.nomeArquivo}"?`
+    );
+
+    if (!confirmar) {
+      return;
+    }
+
+    await this.documentoService.excluirDocumento(documento.id!);
+    await this.carregarDocumentos();
+
+    alert('Documento excluído com sucesso!');
+
+  }
+
+
   abrirModal() {
 
+    this.documentoSelecionado = null;
     this.modalAberto = true;
 
   }
@@ -97,10 +71,14 @@ export class Documentos implements OnInit {
   fecharModal() {
 
     this.modalAberto = false;
+    this.documentoSelecionado = null;
 
   }
 
-  async carregarFuncionarios() {
-    this.funcionarios = await this.funcionarioService.listarFuncionarios();
+  async aoSalvarDocumento() {
+
+    this.fecharModal();
+    await this.carregarDocumentos();
+
   }
 }

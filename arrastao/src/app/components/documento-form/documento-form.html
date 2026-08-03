@@ -1,0 +1,54 @@
+<h2>
+    {{ documento ? '✏️ Editar Documento' : '📄 Novo Documento' }}
+</h2>
+
+<hr>
+
+<label>Funcionário</label>
+
+<select [(ngModel)]="funcionarioId">
+
+    <option value="">Selecione um funcionário</option>
+
+    <option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">
+
+        {{ funcionario.nome }}
+
+    </option>
+
+</select>
+
+<br><br>
+
+<label>Tipo do documento</label>
+
+<select [(ngModel)]="tipo">
+
+    <option value="">Selecione</option>
+
+    <option>RG</option>
+    <option>CPF</option>
+    <option>Carteira de Trabalho</option>
+    <option>Contrato</option>
+    <option>Holerite</option>
+    <option>ASO</option>
+    <option>Comprovante de Residência</option>
+    <option>Outros</option>
+
+</select>
+
+<br><br>
+
+<label>Nome do arquivo</label>
+
+<input type="text" placeholder="Ex.: rg_maria.pdf" [(ngModel)]="nomeArquivo">
+
+<br><br>
+
+<div class="acoes-modal">
+
+    <button type="button" (click)="salvar()">
+        Salvar Documento
+    </button>
+
+</div>
