@@ -31,7 +31,7 @@ export class Funcionarios implements OnInit {
       await this.authService.buscarPerfil();
     }
 
-    this.carregarFuncionarios();
+    await this.carregarFuncionarios();
 
   }
 
@@ -91,6 +91,14 @@ export class Funcionarios implements OnInit {
   fecharModal() {
     this.modalAberto = false;
     this.funcionarioSelecionado = null;
+  }
+
+
+  async aoSalvarFuncionario() {
+
+    this.fecharModal();
+    await this.carregarFuncionarios();
+
   }
 
 }

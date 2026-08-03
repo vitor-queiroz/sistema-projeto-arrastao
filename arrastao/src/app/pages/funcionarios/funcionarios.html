@@ -26,7 +26,7 @@
             ✕
         </button>
 
-        <app-funcionario-form [funcionario]="funcionarioSelecionado"></app-funcionario-form> <!--Isso faz o Angular enviar o funcionário selecionado para o formulário-->
+        <app-funcionario-form [funcionario]="funcionarioSelecionado" (salvou)="aoSalvarFuncionario()"></app-funcionario-form> <!--Isso faz o Angular enviar o funcionário selecionado para o formulário ///////// Eu estou dizendo pro Angular === "Quando o componente emitir o evento salvou, execute o método aoSalvarFuncionario()."-->
 
     </div>
 

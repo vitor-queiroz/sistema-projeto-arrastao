@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FuncionarioService } from '../../services/funcionario.services';
 
@@ -16,6 +16,9 @@ export class FuncionarioForm implements OnChanges {
   constructor(private funcionarioService: FuncionarioService) { }
   @Input()
   funcionario: Funcionario | null = null;
+
+  @Output()
+  salvou = new EventEmitter<void>();
 
   nome = '';
   cpf = '';
@@ -62,8 +65,11 @@ export class FuncionarioForm implements OnChanges {
       alert('Funcionário cadastrado com sucesso!');
 
     }
-      this.nome = '';
-      this.cpf = '';
-      this.setor = '';
-      this.admissao = '';
-  }}
+    this.nome = '';
+    this.cpf = '';
+    this.setor = '';
+    this.admissao = '';
+ 
+    this.salvou.emit(); /* O que esse emit() faz? É como se o formulário dissesse: PAII!! Eu terminei de salvar!! */
+  } 
+}

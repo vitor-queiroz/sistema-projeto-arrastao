@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore';
 import { app } from '../config/firebase.config';
+import { Documento } from '../models/documento.model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +23,7 @@ export class DocumentoService {
 
     }
 
-    async cadastrarDocumento(documento: any) {
+    async cadastrarDocumento(documento: Documento) {
 
         const documentosRef = collection(this.db, 'documentos');
 

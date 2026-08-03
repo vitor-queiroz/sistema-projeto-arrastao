@@ -22,7 +22,7 @@ export class Documentos implements OnInit {
     funcionarioNome: '',
     funcionarioId: '',
     tipo: '',
-    arquivo: '',
+    nomeArquivo: '',
     enviadoPor: 'Administrador',
     dataUpload: new Date().toLocaleDateString('pt-BR'),
     url: 'teste'
@@ -47,7 +47,7 @@ export class Documentos implements OnInit {
     if (
       !this.novoDocumento.funcionarioId ||
       !this.novoDocumento.tipo ||
-      !this.novoDocumento.arquivo
+      !this.novoDocumento.nomeArquivo
     ) {
 
       alert('Preencha todos os campos.');
@@ -78,7 +78,7 @@ export class Documentos implements OnInit {
       funcionarioNome: '',
       funcionarioId: '',
       tipo: '',
-      arquivo: '',
+      nomeArquivo: '',
       enviadoPor: 'Administrador',
       dataUpload: new Date().toLocaleDateString('pt-BR'),
       url: 'teste'
