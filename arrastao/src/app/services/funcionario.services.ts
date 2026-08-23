@@ -41,8 +41,12 @@ export class FuncionarioService {
     await updateDoc(funcionarioRef, {
       nome: funcionario.nome,
       cpf: funcionario.cpf,
+      rg: funcionario.rg,
+      dataNascimento: funcionario.dataNascimento,
       setor: funcionario.setor,
-      admissao: funcionario.admissao
+      cargo: funcionario.cargo,
+      admissao: funcionario.admissao,
+      foto: funcionario.foto
     });
 
   }
