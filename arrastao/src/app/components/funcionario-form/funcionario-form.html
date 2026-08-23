@@ -20,6 +20,33 @@
 
 <div class="campo">
 
+    <label>RG</label>
+    <input
+        type="text"
+        [(ngModel)]="rg">
+
+</div>
+
+<div class="campo">
+
+    <label>Data de Nascimento</label>
+    <input
+        type="date"
+        [(ngModel)]="dataNascimento">
+
+</div>
+
+<div class="campo">
+
+    <label>Cargo</label>
+    <input
+        type="text"
+        [(ngModel)]="cargo">
+
+</div>
+
+<div class="campo">
+
     <label>Setor</label>
     <input
         type="text"
@@ -39,4 +66,3 @@
 <button (click)="salvar()">
     Salvar
 </button>
-

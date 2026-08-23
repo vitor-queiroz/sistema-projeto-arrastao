@@ -2,7 +2,7 @@
 
     <div class="topbar-left">
 
-        <button class="menu-btn">
+        <button class="menu-btn" (click)="menuAberto = !menuAberto">
             ☰
         </button>
 
@@ -27,6 +27,31 @@
     </div>
 
 </header>
+
+<aside class="sidebar" [class.aberto]="menuAberto">
+
+    <nav>
+
+        <a routerLink="/painel">
+            Início
+        </a>
+
+        <a routerLink="/funcionarios">
+            Funcionários
+        </a>
+
+        <a routerLink="/documentos">
+            Documentos
+        </a>
+
+        @if (authService.isSuperAdmin()){
+        <a routerLink="/usuarios">
+            Usuários
+        </a>
+        }
+    </nav>
+
+</aside>
 
 <main>
 

@@ -24,7 +24,9 @@ export class FuncionarioForm implements OnChanges {
   cpf = '';
   setor = '';
   admissao = '';
-
+  rg = '';
+  dataNascimento = '';
+  cargo = '';
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -34,6 +36,9 @@ export class FuncionarioForm implements OnChanges {
       this.cpf = this.funcionario.cpf;
       this.setor = this.funcionario.setor;
       this.admissao = this.funcionario.admissao;
+      this.rg = this.funcionario.rg;
+      this.dataNascimento = this.funcionario.dataNascimento;
+      this.cargo = this.funcionario.cargo;
 
     }
 
@@ -46,7 +51,10 @@ export class FuncionarioForm implements OnChanges {
       nome: this.nome,
       cpf: this.cpf,
       setor: this.setor,
-      admissao: this.admissao
+      admissao: this.admissao,
+      rg: this.rg,
+      dataNascimento: this.dataNascimento,
+      cargo: this.cargo
     };
 
     if (this.funcionario?.id) {
@@ -69,7 +77,10 @@ export class FuncionarioForm implements OnChanges {
     this.cpf = '';
     this.setor = '';
     this.admissao = '';
- 
+    this.rg = '';
+    this.dataNascimento = '';
+    this.cargo = '';
+
     this.salvou.emit(); /* O que esse emit() faz? É como se o formulário dissesse: PAII!! Eu terminei de salvar!! */
-  } 
+  }
 }
