@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../services/usuario.service';
 
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-usuarios',
   standalone: true,
@@ -18,7 +20,7 @@ export class Usuarios implements OnInit {
   nomeEditando = '';
   tipoEditando = '';
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.carregarUsuarios();
@@ -56,6 +58,34 @@ export class Usuarios implements OnInit {
     alert('Usuário atualizado com sucesso!');
 
     this.usuarioEditando = null;
+
+    await this.carregarUsuarios();
+
+  }
+
+  async excluirUsuario(usuario: any) {
+
+    const usuarioLogado = await this.authService.getUsuarioLogado();
+
+    if (usuarioLogado?.uid === usuario.id) {
+
+      alert('Você não pode excluir o próprio usuário.');
+
+      return;
+
+    }
+
+    const confirmar = confirm(
+      `Tem certeza que deseja excluir o usuário ${usuario.nome}?`
+    );
+
+    if (!confirmar) {
+      return;
+    }
+
+    await this.usuarioService.excluirUsuario(usuario.id);
+
+    alert('Usuário excluído com sucesso!');
 
     await this.carregarUsuarios();
 

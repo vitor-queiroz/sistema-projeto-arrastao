@@ -72,7 +72,8 @@
                         Editar
                     </button>
 
-                    <button>
+                    <button *ngIf="usuario.tipo !== 'admin' && usuario.tipo !== 'superadmin'"
+                        (click)="excluirUsuario(usuario)">
                         Excluir
                     </button>
 
