@@ -1,1 +1,87 @@
-<p>usuarios works!</p>
+<h2>Usuários</h2>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let usuario of usuarios">
+            <ng-container *ngIf="usuarioEditando?.id === usuario.id">
+
+                <td>
+                    <input type="text" [(ngModel)]="nomeEditando">
+                </td>
+
+                <td>
+                    {{ usuario.email }}
+                </td>
+
+                <td>
+                    <select [(ngModel)]="tipoEditando">
+
+                        <option value="admin">
+                            Admin
+                        </option>
+
+                        <option value="superadmin">
+                            Super Admin
+                        </option>
+
+                    </select>
+                </td>
+
+                <td>
+
+                    <button (click)="salvarEdicao()">
+                        Salvar
+                    </button>
+
+                    <button (click)="cancelarEdicao()">
+                        Cancelar
+                    </button>
+
+                </td>
+
+            </ng-container>
+
+            <ng-container *ngIf="usuarioEditando?.id !== usuario.id">
+
+                <td>
+                    {{ usuario.nome }}
+                </td>
+
+                <td>
+                    {{ usuario.email }}
+                </td>
+
+                <td>
+                    {{ usuario.tipo }}
+                </td>
+
+                <td>
+
+                    <button (click)="iniciarEdicao(usuario)">
+                        Editar
+                    </button>
+
+                    <button>
+                        Excluir
+                    </button>
+
+                </td>
+
+            </ng-container>
+
+        </tr>
+
+    </tbody>
+
+</table>
