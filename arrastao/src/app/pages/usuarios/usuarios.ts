@@ -18,7 +18,12 @@ export class Usuarios implements OnInit {
   usuarioEditando: any = null;
 
   nomeEditando = '';
-  tipoEditando = '';
+
+  novoUsuario = false;
+
+  nomeNovoUsuario = '';
+  emailNovoUsuario = '';
+  senhaNovoUsuario = '';
 
   constructor(private usuarioService: UsuarioService, private authService: AuthService) { }
 
@@ -36,12 +41,63 @@ export class Usuarios implements OnInit {
     this.usuarioEditando = usuario;
 
     this.nomeEditando = usuario.nome;
-    this.tipoEditando = usuario.tipo;
 
   }
 
   cancelarEdicao() {
     this.usuarioEditando = null;
+
+  }
+
+  abrirCadastro() {
+
+    this.novoUsuario = true;
+
+    this.nomeNovoUsuario = '';
+    this.emailNovoUsuario = '';
+    this.senhaNovoUsuario = '';
+
+  }
+
+  cancelarCadastro() {
+
+    this.novoUsuario = false;
+
+  }
+
+  async salvarNovoUsuario() {
+
+    try {
+      const usuario = await this.authService.cadastrarUsuario(
+        this.emailNovoUsuario,
+        this.senhaNovoUsuario
+      );
+
+      await this.usuarioService.cadastrarUsuario(
+        usuario.uid,
+        {
+          nome: this.nomeNovoUsuario,
+          email: this.emailNovoUsuario,
+          tipo: 'usuario',
+          status: 'pendente'
+        }
+      );
+
+      alert('Usuário cadastrado com sucesso!');
+
+      this.novoUsuario = false;
+
+      await this.carregarUsuarios();
+
+    } catch (erro: any) {
+
+      console.error('ERRO COMPLETO:', erro);
+
+      alert('Erro ao cadastrar usuário:\n' +
+        erro.code + '\n' +
+        erro.message);
+
+    }
 
   }
 
@@ -51,7 +107,6 @@ export class Usuarios implements OnInit {
       this.usuarioEditando.id,
       {
         nome: this.nomeEditando,
-        tipo: this.tipoEditando
       }
     );
 
