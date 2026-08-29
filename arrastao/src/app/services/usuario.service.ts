@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, getDocs, getFirestore, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, doc, updateDoc, deleteDoc, setDoc } from 'firebase/firestore';
 
 import { app } from '../config/firebase.config';
 
@@ -35,6 +35,13 @@ export class UsuarioService {
         const usuarioRef = doc(this.db, 'usuarios', id);
 
         await deleteDoc(usuarioRef);
+    }
+
+    async cadastrarUsuario(id: string, dados: any) {
+
+        const usuarioRef = doc(this.db, 'usuarios', id);
+
+        await setDoc(usuarioRef, dados);/* set ---> cria o documento ou substitui, caso já exista*/
 
     }
 

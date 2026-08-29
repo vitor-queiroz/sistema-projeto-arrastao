@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { app } from '../config/firebase.config';
+import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { app, firebaseConfig } from '../config/firebase.config';
 
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
@@ -14,6 +15,9 @@ export class AuthService {
     private auth = getAuth(app);
     private db = getFirestore(app);
 
+    private appCadastro = initializeApp(firebaseConfig, 'cadastro');
+    private authCadastro = getAuth(this.appCadastro);
+
     perfilUsuario: any = null;
 
     async login(email: string, senha: string) {
@@ -21,6 +25,14 @@ export class AuthService {
         this.perfilUsuario = null;
 
         return await signInWithEmailAndPassword(this.auth, email, senha);
+
+    }
+
+    async cadastrarUsuario(email: string, senha: string) {
+
+        const credencial = await createUserWithEmailAndPassword(this.authCadastro, email, senha);
+
+        return credencial.user;
 
     }
 
