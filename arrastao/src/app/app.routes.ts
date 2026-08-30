@@ -10,12 +10,19 @@ import { authGuard } from './guards/auth.guard';
 import { superAdminGuard } from './guards/super-admin.guard';
 import { Funcionarios } from './pages/funcionarios/funcionarios';
 
+import { ConfirmarCadastro } from './pages/confirmar-cadastro/confirmar-cadastro';
+
 export const routes: Routes = [
     {
         path: '',
         component: Login,
         pathMatch: 'full'  /*Para o Angular entender cada tela ex: /painel /usuarios... */
         //AuthGuard mais pra frente
+    },
+
+    {
+        path: 'confirmar-cadastro',
+        component: ConfirmarCadastro
     },
 
     {

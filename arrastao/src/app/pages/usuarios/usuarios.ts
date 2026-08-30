@@ -73,15 +73,21 @@ export class Usuarios implements OnInit {
         this.senhaNovoUsuario
       );
 
+      const codigo = this.gerarCodigoConfirmacao();
+
+
       await this.usuarioService.cadastrarUsuario(
         usuario.uid,
         {
           nome: this.nomeNovoUsuario,
           email: this.emailNovoUsuario,
           tipo: 'usuario',
-          status: 'pendente'
+          status: 'pendente',
+          codigoConfirmacao: codigo
         }
       );
+
+      console.log('Código de confirmação:', codigo);
 
       alert('Usuário cadastrado com sucesso!');
 
@@ -143,6 +149,14 @@ export class Usuarios implements OnInit {
     alert('Usuário excluído com sucesso!');
 
     await this.carregarUsuarios();
+
+  }
+
+
+
+  gerarCodigoConfirmacao(): string {
+
+    return Math.floor(100000 + Math.random() * 900000).toString(); /* Código de autenticação === Ele sempre vai gerar um número entre 100000 e 999999, portanto teremos exatamente 6 dígitos.*/
 
   }
 

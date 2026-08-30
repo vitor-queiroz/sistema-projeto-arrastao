@@ -25,9 +25,7 @@ export class Login {
 
       if (this.authService.estaPendente()) {
 
-        alert('Seu cadastro ainda está pendente de confirmação.');
-
-        await this.authService.logout();
+        this.router.navigate(['/confirmar-cadastro']);
 
         return;
       }
