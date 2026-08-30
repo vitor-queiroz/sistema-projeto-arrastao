@@ -24,6 +24,13 @@ export class ConfirmarCadastro {
 
     async confirmar() {
 
+        if (this.codigo.length !== 6) {
+
+            alert('Digite o código de 6 dígitos.');
+
+            return;
+        }
+
         const usuario = await this.authService.getUsuarioLogado();
 
         if (!usuario) {
