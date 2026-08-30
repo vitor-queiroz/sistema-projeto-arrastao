@@ -1,6 +1,7 @@
 import { setGlobalOptions } from "firebase-functions";
 import { onCall, HttpsError } from "firebase-functions/v2/https";
-import { Resend } from "resend";
+/*import { Resend } from "resend";*/
+import { BrevoClient } from "@getbrevo/brevo";
 
 setGlobalOptions({ maxInstances: 10 });
 
@@ -15,7 +16,7 @@ export const enviarCodigoConfirmacao = onCall(async (request) => {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.BREVO_API_KEY;
 
   if (!apiKey) {
     throw new HttpsError(
@@ -24,35 +25,53 @@ export const enviarCodigoConfirmacao = onCall(async (request) => {
     );
   }
 
-  const resend = new Resend(apiKey);
-
-  const { error } = await resend.emails.send({
-    from: "onboarding@resend.dev",
-    to: email,
-    subject: "Código de confirmação de cadastro",
-    html: `
-      <h2>Confirmação de cadastro</h2>
-
-      <p>Olá, ${nome}!</p>
-
-      <p>Seu cadastro foi realizado com sucesso.</p>
-
-      <p>Seu código de confirmação é:</p>
-
-      <h1>${codigo}</h1>
-
-      <p>
-        Digite esse código no sistema para ativar seu acesso.
-      </p>
-
-      <p>
-        Se você não realizou esse cadastro, ignore este e-mail.
-      </p>
-    `,
+  const brevo = new BrevoClient({
+    apiKey: apiKey
   });
 
-  if (error) {
-    console.error("Erro ao enviar e-mail:", error);
+  try {
+
+    await brevo.transactionalEmails.sendTransacEmail({
+      sender: {
+        name: "Sistema Arrastão",
+        email: "vitoralencar881@gmail.com"
+      },
+
+      to: [
+        {
+          email: email,
+          name: nome
+        }
+      ],
+
+      subject: "Código de confirmação de cadastro",
+
+      htmlContent: `
+        <h2>Confirmação de cadastro</h2>
+
+        <p>Olá, ${nome}!</p>
+
+        <p>Seu cadastro foi realizado com sucesso.</p>
+
+        <p>Seu código de confirmação é:</p>
+
+        <h1>${codigo}</h1>
+
+        <p>
+          Digite esse código no sistema para ativar seu acesso.
+        </p>
+
+        <p>
+          Se você não realizou esse cadastro, ignore este e-mail.
+        </p>
+      `
+    });
+
+    console.log("E-mail enviado com sucesso para:", email);
+
+  } catch (erro) {
+
+    console.error("Erro ao enviar e-mail pela Brevo:", erro);
 
     throw new HttpsError(
       "internal",
