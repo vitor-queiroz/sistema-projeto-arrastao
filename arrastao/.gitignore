@@ -46,3 +46,19 @@ Thumbs.db
 # Firebase 
 sistema-arrastao-firebase-adminsdk-.json
 reset-password.cjs
+firebase-debug.log
+
+# Compiled JavaScript files
+lib/**/*.js
+lib/**/*.js.map
+
+# TypeScript v1 declaration files
+typings/
+
+# Node.js dependency directory
+node_modules/
+*.local
+
+# Environment variables
+.env
+

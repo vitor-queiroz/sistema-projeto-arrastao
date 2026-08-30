@@ -87,6 +87,12 @@ export class Usuarios implements OnInit {
         }
       );
 
+      await this.authService.enviarCodigoConfirmacao(
+        this.emailNovoUsuario,
+        this.nomeNovoUsuario,
+        codigo
+      );
+
       console.log('Código de confirmação:', codigo);
 
       alert('Usuário cadastrado com sucesso!');

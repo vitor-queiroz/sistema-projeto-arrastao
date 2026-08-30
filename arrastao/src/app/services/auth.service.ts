@@ -7,6 +7,8 @@ import { app, firebaseConfig } from '../config/firebase.config';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
+import { getFunctions, httpsCallable, connectFunctionsEmulator } from 'firebase/functions';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -14,11 +16,19 @@ export class AuthService {
 
     private auth = getAuth(app);
     private db = getFirestore(app);
+    private functions = getFunctions(app);
 
     private appCadastro = initializeApp(firebaseConfig, 'cadastro');
     private authCadastro = getAuth(this.appCadastro);
 
     perfilUsuario: any = null;
+
+
+    constructor() {
+        connectFunctionsEmulator(this.functions, '127.0.0.1', 5001);
+    }
+
+
 
     async login(email: string, senha: string) {
 
@@ -33,6 +43,18 @@ export class AuthService {
         const credencial = await createUserWithEmailAndPassword(this.authCadastro, email, senha);
 
         return credencial.user;
+
+    }
+
+    async enviarCodigoConfirmacao(email: string, nome: string, codigo: string) {
+
+        const funcao = httpsCallable(this.functions, 'enviarCodigoConfirmacao');
+
+        return await funcao({
+            email,
+            nome,
+            codigo
+        });
 
     }
 
@@ -84,7 +106,7 @@ export class AuthService {
 
     }
 
-    
+
 
     isAdmin(): boolean {
         return this.perfilUsuario?.tipo === 'admin';
