@@ -78,6 +78,14 @@ export class AuthService {
     }
 
 
+    estaPendente(): boolean {
+
+        return this.perfilUsuario?.status === 'pendente';
+
+    }
+
+    
+
     isAdmin(): boolean {
         return this.perfilUsuario?.tipo === 'admin';
     }

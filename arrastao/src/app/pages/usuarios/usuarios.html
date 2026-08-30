@@ -21,9 +21,9 @@
     </div>
 
     <div>
-         <label>Senha</label>
+        <label>Senha</label>
 
-         <input type="password" [(ngModel)]="senhaNovoUsuario">
+        <input type="password" [(ngModel)]="senhaNovoUsuario">
     </div>
 
     <button (click)="salvarNovoUsuario()">
@@ -43,6 +43,7 @@
             <th>Nome</th>
             <th>E-mail</th>
             <th>Tipo</th>
+            <th>Status</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -61,7 +62,11 @@
                 </td>
 
                 <td>
-                   {{ usuario.tipo }}
+                    {{ usuario.tipo }}
+                </td>
+
+                <td>
+                    {{ usuario.status }}
                 </td>
 
                 <td>
@@ -90,6 +95,10 @@
 
                 <td>
                     {{ usuario.tipo }}
+                </td>
+
+                <td>
+                    {{ usuario.status }}
                 </td>
 
                 <td>

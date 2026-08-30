@@ -15,14 +15,23 @@ export class Login {
   email = '';
   senha = '';
 
-  constructor(private authService: AuthService, private router: Router){ }
+  constructor(private authService: AuthService, private router: Router) { }
 
   async entrar() {
     try {
 
       await this.authService.login(this.email, this.senha);
       await this.authService.buscarPerfil();
-    
+
+      if (this.authService.estaPendente()) {
+
+        alert('Seu cadastro ainda está pendente de confirmação.');
+
+        await this.authService.logout();
+
+        return;
+      }
+
       this.router.navigate(['/painel']);
 
     } catch (error) {
