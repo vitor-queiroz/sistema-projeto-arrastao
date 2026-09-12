@@ -67,6 +67,18 @@ export class Usuarios implements OnInit {
 
   async salvarNovoUsuario() {
 
+    if (!this.nomeNovoUsuario || !this.emailNovoUsuario || !this.senhaNovoUsuario) {
+      alert('Preencha todos os campos.');
+      return;
+    }
+
+    const erroSenha = this.validarSenha(this.senhaNovoUsuario);
+
+    if (erroSenha) {
+      alert(erroSenha);
+      return;
+    }
+
     try {
       const usuario = await this.authService.cadastrarUsuario(
         this.emailNovoUsuario,
@@ -159,11 +171,36 @@ export class Usuarios implements OnInit {
   }
 
 
+  validarSenha(senha: string): string | null {
+
+    if (senha.length < 8) {
+      return 'A senha deve ter pelo menos 8 caracteres.';
+    }
+
+    if (!/[A-Z]/.test(senha)) {
+      return 'A senha deve conter pelo menos uma letra maiúscula.';
+    }
+
+    if (!/[a-z]/.test(senha)) {
+      return 'A senha deve conter pelo menos uma letra minúscula.';
+    }
+
+    if (!/[0-9]/.test(senha)) {
+      return 'A senha deve conter pelo menos um número.';
+    }
+
+    if (!/[^A-Za-z0-9]/.test(senha)) {
+      return 'A senha deve conter pelo menos um caractere especial, como @, # ou !.';
+    }
+
+    return null;
+  }
+
+
 
   gerarCodigoConfirmacao(): string {
 
     return Math.floor(100000 + Math.random() * 900000).toString(); /* Código de autenticação === Ele sempre vai gerar um número entre 100000 e 999999, portanto teremos exatamente 6 dígitos.*/
 
   }
-
 }
