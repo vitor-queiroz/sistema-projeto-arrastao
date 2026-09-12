@@ -7,6 +7,7 @@ import { Funcionario } from '../../models/funcionario.model';
 import { DocumentoService } from '../../services/documento.service';
 import { FuncionarioService } from '../../services/funcionario.services';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-documento-form',
@@ -18,7 +19,10 @@ import { CommonModule } from '@angular/common';
 export class DocumentoForm implements OnChanges, OnInit {
 
   constructor(
-    private documentoService: DocumentoService, private funcionarioService: FuncionarioService, private cdr: ChangeDetectorRef
+    private documentoService: DocumentoService,
+    private funcionarioService: FuncionarioService,
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService
   ) { }
 
   @Input()
@@ -36,13 +40,23 @@ export class DocumentoForm implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    if (changes['documento'] && this.documento) {
+    if (changes['documento']) {
+
+      if (this.documento) {
 
       this.funcionarioId = this.documento.funcionarioId;
       this.tipo = this.documento.tipo;
       this.nomeArquivo = this.documento.nomeArquivo;
       this.url = this.documento.url;
-    }
+    
+    } else {
+
+      this.funcionarioId = '';
+      this.tipo = '';
+      this.nomeArquivo = '';
+      this.url = '';
+
+    }}
   }
 
   async ngOnInit() {
@@ -75,7 +89,7 @@ export class DocumentoForm implements OnChanges, OnInit {
       nomeArquivo: this.nomeArquivo,
       url: this.url,
       dataUpload: new Date().toLocaleDateString('pt-BR'),
-      enviadoPor: 'Administrador'
+      enviadoPor: this.authService.perfilUsuario?.nome || 'Administrador'
 
     };
 
