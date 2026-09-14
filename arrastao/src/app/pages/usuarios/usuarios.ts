@@ -72,6 +72,16 @@ export class Usuarios implements OnInit {
       return;
     }
 
+    if (!this.validarNome(this.nomeNovoUsuario)) {
+      alert('Digite um nome válido.');
+      return;
+    }
+
+    if (!this.validarEmail(this.emailNovoUsuario)) {
+      alert('Digite um e-mail válido.');
+      return;
+    }
+
     const erroSenha = this.validarSenha(this.senhaNovoUsuario);
 
     if (erroSenha) {
@@ -196,6 +206,17 @@ export class Usuarios implements OnInit {
     return null;
   }
 
+
+  validarEmail(email: string): boolean {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  validarNome(nome: string): boolean {
+
+    return /[A-Za-zÀ-ÿ]/.test(nome) && nome.trim().length >= 2;
+
+  }
 
 
   gerarCodigoConfirmacao(): string {
